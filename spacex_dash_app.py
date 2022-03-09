@@ -74,13 +74,13 @@ def get_pie_chart(entered_site):
     if entered_site == 'ALL':
         df1 = filtered_df.groupby(['Launch Site']).mean()
         df1.reset_index(inplace=True)
-        fig = px.pie(df1, values='class', names='Launch Site', title='Success rate by launch site')
+        fig = px.pie(df1, values='class', names='Launch Site', title='Distribution of successful launches by site')
         return fig
     else:
         # return the outcomes piechart for a selected site
         df2 = filtered_df[filtered_df['Launch Site'] == entered_site].groupby(['class']).count()
         df2.reset_index(inplace=True)        
-        fig = px.pie(df2, values='Launch Site', names='class', title='Total Succes Launches for site: ' + entered_site)
+        fig = px.pie(df2, values='Launch Site', names='class', title='Succes rate for site: ' + entered_site)
         return fig
 
 # TASK 4:
@@ -95,7 +95,7 @@ def get_scatter_chart(entered_site, entered_payload):
             (filtered_df['Payload Mass (kg)'] >= int(entered_payload[0]))
             & (filtered_df['Payload Mass (kg)'] <= int(entered_payload[1]))
             ]
-        fig = px.scatter(df, x='Payload Mass (kg)', y='class', color='Booster Version Category', title = 'Success payload by launch site')
+        fig = px.scatter(df, x='Payload Mass (kg)', y='class', color='Booster Version Category', title = 'Success payload for all sites')
         return fig
     else:
         df = filtered_df[
